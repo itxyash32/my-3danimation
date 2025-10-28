@@ -48,3 +48,110 @@
   <div class="circle"></div>
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simple Animation Maker</title>
+<style>
+  body {
+    background: linear-gradient(135deg, #000428, #004e92);
+    color: white;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    overflow: hidden;
+  }
+  h1 { margin-top: 20px; }
+  canvas {
+    background: #111;
+    margin-top: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px #00ffff;
+  }
+  .buttons {
+    margin: 10px;
+  }
+  button {
+    margin: 5px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 8px;
+    background-color: #00ccff;
+    color: white;
+    font-weight: bold;
+  }
+  button:hover {
+    background-color: #00ffff;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+  <h1>🎨 Simple Animation Maker</h1>
+  <div class="buttons">
+    <button onclick="addCircle()">Add Circle</button>
+    <button onclick="addSquare()">Add Square</button>
+    <button onclick="clearCanvas()">Clear</button>
+  </div>
+  <canvas id="canvas" width="350" height="350"></canvas>
+
+<script>
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
+let shapes = [];
+
+function addCircle() {
+  shapes.push({
+    type: "circle",
+    x: Math.random() * 300 + 25,
+    y: Math.random() * 300 + 25,
+    dx: (Math.random() - 0.5) * 4,
+    dy: (Math.random() - 0.5) * 4,
+    color: randomColor()
+  });
+}
+
+function addSquare() {
+  shapes.push({
+    type: "square",
+    x: Math.random() * 300 + 25,
+    y: Math.random() * 300 + 25,
+    dx: (Math.random() - 0.5) * 4,
+    dy: (Math.random() - 0.5) * 4,
+    color: randomColor()
+  });
+}
+
+function clearCanvas() {
+  shapes = [];
+}
+
+function randomColor() {
+  const colors = ["#00ffff", "#ff00ff", "#ffff00", "#00ff00", "#ff6600"];
+  return colors[Math.floor(Math.random() * colors.length)];
+}
+
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  shapes.forEach(s => {
+    ctx.fillStyle = s.color;
+    if (s.type === "circle") {
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, 20, 0, Math.PI * 2);
+      ctx.fill();
+    } else {
+      ctx.fillRect(s.x - 20, s.y - 20, 40, 40);
+    }
+    s.x += s.dx;
+    s.y += s.dy;
+    if (s.x < 20 || s.x > 330) s.dx *= -1;
+    if (s.y < 20 || s.y > 330) s.dy *= -1;
+  });
+  requestAnimationFrame(animate);
+}
+animate();
+</script>
+</body>
+</html>
