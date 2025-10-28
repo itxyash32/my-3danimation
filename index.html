@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Animated Website</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, #000428, #004e92);
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+
+    h1 {
+      position: absolute;
+      top: 10%;
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px cyan; }
+      to { text-shadow: 0 0 30px #00ffcc; }
+    }
+
+    .circle {
+      position: absolute;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: radial-gradient(circle, cyan, transparent);
+      animation: float 5s infinite alternate ease-in-out;
+    }
+
+    @keyframes float {
+      0% { transform: translate(-100px, -100px) scale(1); }
+      100% { transform: translate(100px, 100px) scale(1.5); }
+    }
+  </style>
+</head>
+<body>
+  <h1>✨ Welcome to My Animation ✨</h1>
+  <div class="circle"></div>
+</body>
+</html>
